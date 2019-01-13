@@ -45,7 +45,7 @@ def time_string():
 def train(log_dir, args):
   commit = get_git_commit() if args.git else 'None'
   checkpoint_path = os.path.join(log_dir, 'model.ckpt')
-  input_path = os.path.join(args.base_dir, args.input)
+  input_path = args.input
   log('Checkpoint path: %s' % checkpoint_path)
   log('Loading training data from: %s' % input_path)
   log('Using model: %s' % args.model)

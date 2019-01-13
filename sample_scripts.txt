@@ -1,1 +1,2 @@
 python3 preprocess.py --base_dir="/home/padarus1/Documents/projects/s/datasets" --output="tacotron_training/ljspeech" --dataset="ljspeech" &
+python3 train.py --input "/home/padarus1/Documents/projects/s/datasets/tacotron_training/training_ljspeech/train.txt" --name="test_run"
