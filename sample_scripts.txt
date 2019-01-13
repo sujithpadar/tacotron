@@ -1,0 +1,1 @@
+python3 preprocess.py --base_dir="/home/padarus1/Documents/projects/s/datasets" --output="tacotron_training/ljspeech" --dataset="ljspeech" &
