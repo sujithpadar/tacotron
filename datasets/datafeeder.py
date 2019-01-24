@@ -86,13 +86,18 @@ class DataFeeder(threading.Thread):
     # Read a group of examples:
     n = self._hparams.batch_size
     r = self._hparams.outputs_per_step
-    examples = [self._get_next_example() for i in range(n * _batches_per_group)]
+    examples_with_name = [self._get_next_example() for i in range(n * _batches_per_group)]
 
     # Bucket examples based on similar output sequence length for efficiency:
-    examples.sort(key=lambda x: x[3])
+    examples_with_name.sort(key=lambda x: x[4])
+    examples = [example[1:6] for example in examples_with_name]
+    file_names= [example[0] for example in examples_with_name]
+    
     batches = [examples[i:i+n] for i in range(0, len(examples), n)]
     random.shuffle(batches)
 
+    log('files which are being trained on:')
+    log(file_names)
     log('Generated %d batches of size %d in %.03f sec' % (len(batches), n, time.time() - start))
     for batch in batches:
       feed_dict = dict(zip(self._placeholders, _prepare_batch(batch, r)))
@@ -111,11 +116,12 @@ class DataFeeder(threading.Thread):
     if self._cmudict and random.random() < _p_cmudict:
       text = ' '.join([self._maybe_get_arpabet(word) for word in text.split(' ')])
 
+    file_name = meta[0].split('-')[2]
     input_data = np.asarray(text_to_sequence(text, self._cleaner_names), dtype=np.int32)
     linear_target = np.load(os.path.join(self._datadir, meta[0]))
     mel_target = np.load(os.path.join(self._datadir, meta[1]))
     speaker_id = int(meta[4])
-    return (input_data, mel_target, linear_target, len(linear_target), speaker_id)
+    return (file_name,input_data, mel_target, linear_target, len(linear_target), speaker_id)
 
 
   def _maybe_get_arpabet(self, word):

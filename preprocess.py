@@ -25,7 +25,7 @@ def preprocess_speecon(args):
   in_dir = os.path.join(args.base_dir, 'speecon')
   out_dir = os.path.join(args.base_dir, args.output)
   os.makedirs(out_dir, exist_ok=True)
-  metadata = speecon.build_from_path(in_dir, out_dir, args.num_workers, tqdm=tqdm)
+  metadata = speecon.build_from_path(in_dir, out_dir, args.transcript_filename, args.num_workers, tqdm=tqdm )
   write_metadata(metadata, out_dir)
 
 def preprocess_vctk(args):
@@ -51,6 +51,7 @@ def main():
   parser.add_argument('--base_dir', default=os.path.expanduser('~/tacotron'))
   parser.add_argument('--output', default='training')
   parser.add_argument('--dataset', required=True, choices=['blizzard', 'ljspeech', 'vctk', 'speecon'])
+  parser.add_argument('--transcript_filename',default = '') 
   parser.add_argument('--num_workers', type=int, default=cpu_count())
   args = parser.parse_args()
   if args.dataset == 'blizzard':

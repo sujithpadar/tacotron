@@ -10,7 +10,7 @@ from util import audio
 _min_samples = 2000
 _threshold_db = 25
 
-def build_from_path(in_dir, out_dir, num_workers=1, tqdm=lambda x: x):
+def build_from_path(in_dir, out_dir, transcript_filename, num_workers=1, tqdm=lambda x: x):
   '''Preprocesses the Speecon Speech dataset from a given input path into a given output directory.
 
     Args:
@@ -28,12 +28,12 @@ def build_from_path(in_dir, out_dir, num_workers=1, tqdm=lambda x: x):
   executor = ProcessPoolExecutor(max_workers=num_workers)
   futures = []
   index = 1
-  with open(os.path.join(in_dir, 'transcripts.csv'), encoding='utf-8') as f:
+  with open(os.path.join(in_dir, transcript_filename), encoding='utf-8') as f:
     for line in f:
       parts = line.strip().split(',')
-      wav_path = os.path.join(in_dir, parts[2], '%s.wav' % parts[1])
-      text = parts[4]
-      speaker_id = int(parts[3])
+      wav_path = os.path.join(in_dir, '%s.wav' % parts[0].split('.')[0])
+      text = parts[2]
+      speaker_id = int(parts[1])
       futures.append(executor.submit(partial(_process_utterance, out_dir, index, wav_path, text, speaker_id)))
       index += 1
   return [future.result() for future in tqdm(futures)]
