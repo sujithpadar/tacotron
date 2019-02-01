@@ -31,17 +31,23 @@ def run_eval(args):
   synth = Synthesizer()
   synth.load(args.checkpoint)
   base_path = get_output_base_path(args.checkpoint)
-  for i, text in enumerate(sentences):
-    path = '%s-%d.wav' % (base_path, i)
-    print('Synthesizing: %s' % path)
-    with open(path, 'wb') as f:
-      f.write(synth.synthesize(text, args.speaker))
+  with open(args.text_file) as file:
+      for line in file:
+          parts = line.split('|')
+          i = parts[0]
+          text = parts[1]
+          speaker = int(parts[2])
+          path = '%s-%s.wav' % (base_path, i)
+          print('Synthesizing: %s' % path)
+          with open(path, 'wb') as f:
+              f.write(synth.synthesize(text, speaker))
 
 
 def main():
   parser = argparse.ArgumentParser()
   parser.add_argument('--checkpoint', required=True, help='Path to model checkpoint')
-  parser.add_argument('--speaker', type=int, default=374, help='Speaker ID')
+  parser.add_argument('--text_file', required=True, help='Path to text file to generate <id>|<sentence>|<speaker id>')
+  # parser.add_argument('--speaker', type=int, default=374, help='Speaker ID')
   parser.add_argument('--hparams', default='',
     help='Hyperparameter overrides as a comma-separated list of name=value pairs')
   args = parser.parse_args()

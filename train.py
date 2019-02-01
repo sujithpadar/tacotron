@@ -6,6 +6,7 @@ import subprocess
 import time
 import tensorflow as tf
 import traceback
+import numpy as np
 
 from datasets.datafeeder import DataFeeder
 from hparams import hparams, hparams_debug_string
@@ -51,6 +52,16 @@ def train(log_dir, args):
   log('Using model: %s' % args.model)
   log(hparams_debug_string())
 
+  #Calculate the Number of speakers in the training.
+  speaker_ids = []
+  with open(input_path,'r') as f:
+    for line in f:
+      line = line.rstrip('\n')
+      speaker_id = int(line.split('|')[4])
+      speaker_ids.append(speaker_id)
+
+  num_speakers = np.max(np.unique(speaker_ids))
+
   # Set up DataFeeder:
   coord = tf.train.Coordinator()
   with tf.variable_scope('datafeeder') as scope:
@@ -60,7 +71,7 @@ def train(log_dir, args):
   global_step = tf.Variable(0, name='global_step', trainable=False)
   with tf.variable_scope('model') as scope:
     model = create_model(args.model, hparams)
-    model.initialize(feeder.inputs, feeder.input_lengths, feeder.speaker_ids,
+    model.initialize(feeder.inputs, feeder.input_lengths, feeder.speaker_ids, num_speakers,
       feeder.mel_targets, feeder.linear_targets)
     model.add_loss()
     model.add_optimizer(global_step)

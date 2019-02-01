@@ -14,7 +14,7 @@ class Tacotron():
     self._hparams = hparams
 
 
-  def initialize(self, inputs, input_lengths, speaker_ids, mel_targets=None, linear_targets=None):
+  def initialize(self, inputs, input_lengths, speaker_ids, num_speakers, mel_targets=None, linear_targets=None):
     '''Initializes the model for inference.
 
     Sets "mel_outputs", "linear_outputs", and "alignments" fields.
@@ -43,7 +43,7 @@ class Tacotron():
       embedded_inputs = tf.nn.embedding_lookup(embedding_table, inputs)          # [N, T_in, embed_depth=256]
       # Speaker Embeddings
       speaker_embedding_table = tf.get_variable(
-        'speaker_embedding', [377, hp.embed_depth], dtype=tf.float32,
+        'speaker_embedding', [num_speakers, hp.embed_depth], dtype=tf.float32,
         initializer=tf.truncated_normal_initializer(stddev=0.5))
       tiled_speaker_id = tf.tile(tf.expand_dims(speaker_ids, axis=1), [1, tf.shape(inputs)[1]])
       embedded_speakers = tf.nn.embedding_lookup(

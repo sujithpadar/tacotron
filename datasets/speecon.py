@@ -27,19 +27,18 @@ def build_from_path(in_dir, out_dir, transcript_filename, num_workers=1, tqdm=la
   # can omit it and just call _process_utterance on each input if you want.
   executor = ProcessPoolExecutor(max_workers=num_workers)
   futures = []
-  index = 1
   with open(os.path.join(in_dir, transcript_filename), encoding='utf-8') as f:
     for line in f:
       parts = line.strip().split(',')
       wav_path = os.path.join(in_dir, '%s.wav' % parts[0].split('.')[0])
+      file_name = parts[0].split('/')[3].split('.')[0]
       text = parts[2]
       speaker_id = int(parts[1])
-      futures.append(executor.submit(partial(_process_utterance, out_dir, index, wav_path, text, speaker_id)))
-      index += 1
+      futures.append(executor.submit(partial(_process_utterance, out_dir, file_name, wav_path, text, speaker_id)))
   return [future.result() for future in tqdm(futures)]
 
 
-def _process_utterance(out_dir, index, wav_path, text, speaker_id):
+def _process_utterance(out_dir, file_name, wav_path, text, speaker_id):
   '''Preprocesses a single utterance audio/text pair.
 
   This writes the mel and linear scale spectrograms to disk and returns a tuple to write
@@ -47,7 +46,7 @@ def _process_utterance(out_dir, index, wav_path, text, speaker_id):
 
   Args:
     out_dir: The directory to write the spectrograms into
-    index: The numeric index to use in the spectrogram filenames.
+    file_name: The file name to use in the spectrogram filenames.
     wav_path: Path to the audio file containing the speech input
     text: The text spoken in the input audio file
     speaker_id: The speaker Id of the audio file.
@@ -68,8 +67,8 @@ def _process_utterance(out_dir, index, wav_path, text, speaker_id):
   mel_spectrogram = audio.melspectrogram(wav).astype(np.float32)
 
   # Write the spectrograms to disk:
-  spectrogram_filename = 'speecon-spec-%05d.npy' % index
-  mel_filename = 'speecon-mel-%05d.npy' % index
+  spectrogram_filename = file_name + '-speecon-spec.npy'
+  mel_filename = file_name + '-speecon-mel.npy'
   np.save(os.path.join(out_dir, spectrogram_filename), spectrogram.T, allow_pickle=False)
   np.save(os.path.join(out_dir, mel_filename), mel_spectrogram.T, allow_pickle=False)
 
