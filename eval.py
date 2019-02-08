@@ -19,8 +19,11 @@ sentences = [
 ]
 
 
-def get_output_base_path(checkpoint_path):
+def get_output_base_path(checkpoint_path,text_file_name):
   base_dir = os.path.dirname(checkpoint_path)
+  base_dir = os.path.join(base_dir,text_file_name.split('.')[0])
+  if not os.path.exists(base_dir):
+      os.makedirs(base_dir)
   m = re.compile(r'.*?\.ckpt\-([0-9]+)').match(checkpoint_path)
   name = 'eval-%d' % int(m.group(1)) if m else 'eval'
   return os.path.join(base_dir, name)
@@ -29,15 +32,16 @@ def get_output_base_path(checkpoint_path):
 def run_eval(args):
   print(hparams_debug_string())
   synth = Synthesizer()
-  synth.load(args.checkpoint)
-  base_path = get_output_base_path(args.checkpoint)
+  synth.load(args.checkpoint,args.num_speakers)
+  base_path = get_output_base_path(args.checkpoint,args.text_file)
   with open(args.text_file) as file:
       for line in file:
           parts = line.split('|')
           i = parts[0]
           text = parts[1]
+          text_filename = text.split(' ')[0]
           speaker = int(parts[2])
-          path = '%s-%s.wav' % (base_path, i)
+          path = '%s-%s-%d.wav' % (base_path, text_filename, speaker)
           print('Synthesizing: %s' % path)
           with open(path, 'wb') as f:
               f.write(synth.synthesize(text, speaker))
@@ -47,6 +51,7 @@ def main():
   parser = argparse.ArgumentParser()
   parser.add_argument('--checkpoint', required=True, help='Path to model checkpoint')
   parser.add_argument('--text_file', required=True, help='Path to text file to generate <id>|<sentence>|<speaker id>')
+  parser.add_argument('--num_speakers', required=True, help='number of spekaers during the training')
   # parser.add_argument('--speaker', type=int, default=374, help='Speaker ID')
   parser.add_argument('--hparams', default='',
     help='Hyperparameter overrides as a comma-separated list of name=value pairs')
