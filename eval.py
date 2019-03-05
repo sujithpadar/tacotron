@@ -21,7 +21,7 @@ sentences = [
 
 def get_output_base_path(checkpoint_path,text_file_name):
   base_dir = os.path.dirname(checkpoint_path)
-  base_dir = os.path.join(base_dir,text_file_name.split('.')[0])
+  base_dir = os.path.join(base_dir,text_file_name.split('/')[-1].split('.')[0])
   if not os.path.exists(base_dir):
       os.makedirs(base_dir)
   m = re.compile(r'.*?\.ckpt\-([0-9]+)').match(checkpoint_path)
@@ -41,7 +41,7 @@ def run_eval(args):
           text = parts[1]
           text_filename = text.split(' ')[0]
           speaker = int(parts[2])
-          path = '%s-%s-%d.wav' % (base_path, text_filename, speaker)
+          path = '%s-%s-%d.wav' % (base_path, i, speaker)
           print('Synthesizing: %s' % path)
           with open(path, 'wb') as f:
               f.write(synth.synthesize(text, speaker))
