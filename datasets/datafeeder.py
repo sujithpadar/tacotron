@@ -6,6 +6,7 @@ import threading
 import time
 import traceback
 from text import cmudict, text_to_sequence
+from text.symbols import phone_to_sequence
 from util.infolog import log
 
 
@@ -117,11 +118,13 @@ class DataFeeder(threading.Thread):
       text = ' '.join([self._maybe_get_arpabet(word) for word in text.split(' ')])
 
     file_name = meta[0].split('-')[2]
-    input_data = np.asarray(text_to_sequence(text, self._cleaner_names), dtype=np.int32)
+    # Changing the text_to_sequence function
+    # input_data = np.asarray(text_to_sequence(text, self._cleaner_names), dtype=np.int32)
+    input_data = np.asarray(phone_to_sequence(text), dtype=np.int32)
     linear_target = np.load(os.path.join(self._datadir, meta[0]))
     mel_target = np.load(os.path.join(self._datadir, meta[1]))
     speaker_id = int(meta[4])
-    return (file_name,input_data, mel_target, linear_target, len(linear_target), speaker_id)
+    return (file_name, input_data, mel_target, linear_target, len(linear_target), speaker_id)
 
 
   def _maybe_get_arpabet(self, word):

@@ -1,7 +1,7 @@
 import tensorflow as tf
 from tensorflow.contrib.rnn import GRUCell, MultiRNNCell, OutputProjectionWrapper, ResidualWrapper
 from tensorflow.contrib.seq2seq import BasicDecoder, BahdanauAttention, AttentionWrapper
-from text.symbols import symbols
+from text.symbols import glob_ph_attribute_vector
 from util.infolog import log
 from .helpers import TacoTestHelper, TacoTrainingHelper
 from .modules import encoder_cbhg, post_cbhg, prenet
@@ -37,9 +37,16 @@ class Tacotron():
       hp = self._hparams
 
       # Embeddings
+      # Using a fixed embedding as defined by human experts for each Phone
+      '''
       embedding_table = tf.get_variable(
         'embedding', [len(symbols), hp.embed_depth], dtype=tf.float32,
         initializer=tf.truncated_normal_initializer(stddev=0.5))
+      '''
+      embedding_table = tf.constant(
+                              glob_ph_attribute_vector,
+                              name='embedding',
+                              dtype=tf.float32)
       embedded_inputs = tf.nn.embedding_lookup(embedding_table, inputs)          # [N, T_in, embed_depth=256]
       # Speaker Embeddings
       speaker_embedding_table = tf.get_variable(
