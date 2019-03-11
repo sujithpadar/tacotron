@@ -37,8 +37,7 @@ class Tacotron():
       hp = self._hparams
 
       # Embeddings
-      # Using a fixed embedding as defined by human experts for each Phone
-      '''
+      # Using a learnable embedding
       embedding_table = tf.get_variable(
         'embedding', [len(symbols), hp.embed_depth], dtype=tf.float32,
         initializer=tf.truncated_normal_initializer(stddev=0.5))
@@ -47,6 +46,7 @@ class Tacotron():
                               glob_ph_attribute_vector,
                               name='embedding',
                               dtype=tf.float32)
+      '''
       embedded_inputs = tf.nn.embedding_lookup(embedding_table, inputs)          # [N, T_in, embed_depth=256]
       # Speaker Embeddings
       speaker_embedding_table = tf.get_variable(
@@ -106,6 +106,7 @@ class Tacotron():
       # Grab alignments from the final decoder state:
       alignments = tf.transpose(final_decoder_state[0].alignment_history.stack(), [1, 2, 0])
 
+      self.embedded_phonemes = embedding_table
       self.inputs = inputs
       self.input_lengths = input_lengths
       self.speaker_ids = speaker_ids
