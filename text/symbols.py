@@ -26,14 +26,14 @@ symbols = [_pad, _eos] + list(_characters)  + _arpabet
 '''
 import pickle
 
-global_phone_rep = pickle.load(open('phone_attributes.pickle', 'rb'))
+global_phone_rep = pickle.load(open('text/phone_attributes.pickle', 'rb'))
 
 id_to_phone = global_phone_rep['phones']
 symbols = list(id_to_phone.values())
 phone_to_id = {value: key for key, value in id_to_phone.items()}
 
 def phone_to_sequence(text):
-    sequence = [phone_to_id[s] for s in text.split(' ')]
+    sequence = [phone_to_id[s] for s in text.rstrip().split(' ')]
     return sequence
 
 

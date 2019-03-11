@@ -97,8 +97,6 @@ class DataFeeder(threading.Thread):
     batches = [examples[i:i+n] for i in range(0, len(examples), n)]
     random.shuffle(batches)
 
-    log('files which are being trained on:')
-    log(file_names)
     log('Generated %d batches of size %d in %.03f sec' % (len(batches), n, time.time() - start))
     for batch in batches:
       feed_dict = dict(zip(self._placeholders, _prepare_batch(batch, r)))
@@ -120,6 +118,7 @@ class DataFeeder(threading.Thread):
     file_name = meta[0].split('-')[2]
     # Changing the text_to_sequence function
     # input_data = np.asarray(text_to_sequence(text, self._cleaner_names), dtype=np.int32)
+    # log('text:{}'.format(text))
     input_data = np.asarray(phone_to_sequence(text), dtype=np.int32)
     linear_target = np.load(os.path.join(self._datadir, meta[0]))
     mel_target = np.load(os.path.join(self._datadir, meta[1]))
