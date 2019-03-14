@@ -4,7 +4,8 @@ import tensorflow as tf
 from hparams import hparams
 from librosa import effects
 from models import create_model
-from text import text_to_sequence
+# from text import text_to_sequence
+from text.symbols import phone_to_sequence
 from util import audio
 
 
@@ -29,7 +30,9 @@ class Synthesizer:
 
   def synthesize(self, text, speaker_id):
     cleaner_names = [x.strip() for x in hparams.cleaners.split(',')]
-    seq = text_to_sequence(text, cleaner_names)
+
+    seq = phone_to_sequence(text)
+    # seq = text_to_sequence(text, cleaner_names)
     feed_dict = {
       self.model.inputs: [np.asarray(seq, dtype=np.int32)],
       self.model.input_lengths: np.asarray([len(seq)], dtype=np.int32),

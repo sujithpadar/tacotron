@@ -39,7 +39,6 @@ def run_eval(args):
           parts = line.split('|')
           i = parts[0]
           text = parts[1]
-          text_filename = text.split(' ')[0]
           speaker = int(parts[2])
           path = '%s-%s-%d.wav' % (base_path, i, speaker)
           print('Synthesizing: %s' % path)
