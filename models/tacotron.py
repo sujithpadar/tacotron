@@ -39,7 +39,7 @@ class Tacotron():
 
       # Embeddings
       # Using a fixed embedding as defined by human experts for each Phone
-      '''
+      
       embedding_table = tf.get_variable(
         'embedding', [len(symbols), hp.embed_depth], dtype=tf.float32,
         initializer=tf.truncated_normal_initializer(stddev=0.5))
@@ -49,7 +49,9 @@ class Tacotron():
                               glob_ph_attribute_vector,
                               name='embedding',
                               dtype=tf.float32)
+      '''
       embedded_inputs = tf.nn.embedding_lookup(embedding_table, inputs)          # [N, T_in, embed_depth=256]
+      
       # Speaker Embeddings
       '''
       speaker_embedding_table = tf.get_variable(
