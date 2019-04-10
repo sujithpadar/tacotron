@@ -1,0 +1,1 @@
+python3 train.py --input /l/padarus1/p/datasets/tacotron_training/speecon-training-all-16k/all_12_train_ph.txt --name spk-emb

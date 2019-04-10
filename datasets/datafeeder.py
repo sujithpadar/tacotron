@@ -122,7 +122,7 @@ class DataFeeder(threading.Thread):
     input_data = np.asarray(phone_to_sequence(text), dtype=np.int32)
     linear_target = np.load(os.path.join(self._datadir, meta[0]))
     mel_target = np.load(os.path.join(self._datadir, meta[1]))
-    speaker_id = int(meta[4])
+    speaker_id = int(meta[4])-1
     return (file_name, input_data, mel_target, linear_target, len(linear_target), speaker_id)
 
 

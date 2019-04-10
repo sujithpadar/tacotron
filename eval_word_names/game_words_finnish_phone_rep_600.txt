@@ -1,0 +1,311 @@
+girl|g ɜ ɫ|600
+hello|h ɛ l əʊ|600
+book|b ʊ k|600
+learn|l ɜ n|600
+bye bye|b aɪ sil b aɪ sil|600
+come on|k ʌ m sil ɒ n sil|600
+leaf|l iː f|600
+plant|p l ɑː n t|600
+tree|t ɹ iː|600
+rock|ɹ ɒ k|600
+life|l aɪ f|600
+wrong|ɹ ɒ ŋ|600
+round|ɹ aʊ n d|600
+wet|w ɛ t|600
+high|h aɪ|600
+school|s k uː ɫ|600
+make|m eɪ k|600
+lick|l ɪ k|600
+milk|m ɪ ɫ k|600
+more|m ɔ|600
+spoon|s p uː n|600
+write|ɹ aɪ t|600
+boy|b ɔɪ|600
+lake|l eɪ k|600
+light|l aɪ t|600
+sorry|s ɒ ɹ iː|600
+air|ɛə|600
+moon|m uː n|600
+low|l əʊ|600
+sun|s ʌ n|600
+sand|s a n d|600
+bush|b ʊ ʃ|600
+river|ɹ ɪ v ə|600
+country|k ʌ n t ɹ iː|600
+cat|kʰ a t|600
+mouse|m aʊ s|600
+cow|kʰ aʊ|600
+duck|d ʌ k|600
+chicken|tʃ ɪ k ɪ n|600
+lunch|l ʌ n tʃ|600
+bake|b eɪ k|600
+cake|kʰ eɪ k|600
+apple|a p ə ɫ|600
+best|b ɛ s t|600
+money|m ʌ n iː|600
+cap|kʰ a p|600
+shirt|ʃ ɜ t|600
+wear|w ɪə|600
+shoe|ʃ uː|600
+belt|b ɛ ɫ t|600
+ice skating|aɪ s sil s k eɪ t ɪ ŋ sil|600
+ice hockey|aɪ s sil h ɒ k iː sil|600
+baseball|b eɪ s b ɔ ɫ|600
+game|g eɪ m|600
+goal|g əʊ ɫ|600
+party|pʰ ɑː t iː|600
+movie|m uː v iː|600
+basketball|b ɑː s k ɪ t b ɔ ɫ|600
+read|ɹ ɛ d|600
+sing|s ɪ ŋ|600
+ski|s k iː|600
+win|w ɪ n|600
+parents|pʰ ɛə ɹ ə n t s|600
+family|f a m ə l iː|600
+sister|s ɪ s t ə|600
+teacher|tʰ iː tʃ ə|600
+speak|s p iː k|600
+pet|pʰ ɛ t|600
+neighbour|n eɪ b ə|600
+sweet|s w iː t|600
+dessert|d ɪ z ɜ t|600
+glass|g l ɑː s|600
+say|s eɪ|600
+friend|f ɹ ɛ n d|600
+carrot|kʰ a ɹ ə t|600
+want|w ɒ n t|600
+fun|f ʌ n|600
+bad|b a d|600
+fork|f ɔ k|600
+play|p l eɪ|600
+finger|f ɪ ŋ g ə|600
+knee|n iː|600
+shoulder|ʃ əʊ ɫ d ə|600
+neck|n ɛ k|600
+feet|f iː t|600
+body|b ɒ d iː|600
+arm|ɑː m|600
+toe|tʰ əʊ|600
+elbow|ɛ ɫ b əʊ|600
+hair|h ɛə|600
+chip|tʃ ɪ p|600
+strawberry|s t ɹ ɔ b ə ɹ iː|600
+tomato|tʰ ə m ɑː t əʊ|600
+chew|tʃ uː|600
+toast|tʰ əʊ s t|600
+snack|s n a k|600
+salad|s a l ə d|600
+salt|s ɔ ɫ t|600
+chocolate|tʃ ɒ k l ɪ t|600
+cry|k ɹ aɪ|600
+sea|s iː|600
+smile|s m aɪ ɫ|600
+she is|ʃ ɪ sil ɪ z sil|600
+i was|aɪ sil w ə z sil|600
+i am|aɪ sil ə m sil|600
+dream|d ɹ iː m|600
+we were|w ɪ sil w ɜ sil sil|600
+he was|ɪ sil w ə z sil|600
+miss|m ɪ s|600
+laugh|l ɑː f|600
+don t|d ɒ n sil tʰ iː sil|600
+butterfly|b ʌ t ə f l aɪ|600
+fox|f ɒ k s|600
+hedgehog|h ɛ dʒ h ɒ g|600
+bee|b iː|600
+snake|s n eɪ k|600
+monkey|m ʌ ŋ k iː|600
+fish|f ɪ ʃ|600
+bug|b ʌ g|600
+bird|b ɜ d|600
+hare|h ɛə|600
+elephant|ɛ l ɪ f n̩ t|600
+orange txt|sil|600
+use txt|sil|600
+jump txt|sil|600
+theatre|θ ɪə t ə|600
+think|θ ɪ ŋ k|600
+thirsty|θ ɜ s t iː|600
+right|ɹ aɪ t|600
+mouth|m aʊ θ|600
+three|θ ɹ iː|600
+bath|b ɑː θ|600
+thick|θ ɪ k|600
+thing|θ ɪ ŋ|600
+thank you|θ a ŋ k sil j ə sil|600
+father|f ɑː ð ə|600
+hard|h ɑː d|600
+there|ð ɛə ɹ s|600
+with|w ɪ ð|600
+brother|b ɹ ʌ ð ə|600
+mother|m ʌ ð ə|600
+then|ð ɛ n|600
+these|ð iː z|600
+than|ð ə n|600
+this|ð ɪ s|600
+their|ð ɛə|600
+door|d ɔ|600
+phone|f əʊ n|600
+shower|ʃ aʊ ə|600
+living room|l ɪ v ɪ ŋ sil ɹ ʊ m sil|600
+bedroom|b ɛ d ɹ ʊ m|600
+room|ɹ ʊ m|600
+house|h aʊ z|600
+sleep|s l iː p|600
+toilet|tʰ ɔɪ l ə t|600
+lock|l ɒ k|600
+jam|dʒ a m|600
+jaw txt|sil|600
+quiet|k w aɪ ə t|600
+teeth|tʰ iː θ|600
+month|m ʌ n θ|600
+throw|θ ɹ əʊ|600
+north|n ɔ θ|600
+soft|s ɒ f t|600
+that|ð ə t|600
+clothes|k l əʊ ð z|600
+maths|m a θ s|600
+thin|θ ɪ n|600
+sheep|ʃ iː p|600
+those|ð əʊ z|600
+the|ð ə|600
+morning|m ɔ n ɪ ŋ|600
+night|n aɪ t|600
+time|tʰ aɪ m|600
+what|w ə t|600
+day|d eɪ|600
+hay|h eɪ|600
+evening|iː v n̩ ɪ ŋ|600
+yesterday|j ɛ s t ə d iː|600
+year|j ɪə|600
+here|h ɪə|600
+week|w iː k|600
+europe|j ʊə ɹ ə p|600
+live|l ɪ v|600
+language|l a ŋ g w ɪ dʒ|600
+city|s ɪ t iː|600
+finnish|f ɪ n ɪ ʃ|600
+village|v ɪ l ɪ dʒ|600
+swedish|s w iː d ɪ ʃ|600
+finland|f ɪ n l ə n d|600
+england|ɪ ŋ g l ə n d|600
+finn|f ɪ n|600
+town|tʰ aʊ n|600
+field|f iː ɫ d|600
+candy|kʰ a n d iː|600
+they|ð eɪ|600
+here you are|h ɪə sil sil j ə sil ə sil sil|600
+yes please|j ɛ s sil p l iː z sil|600
+good night|g ʊ d sil n aɪ t sil|600
+well done|w ɛ ɫ sil d ʌ n sil|600
+i am sorry|aɪ sil ə m sil s ɒ ɹ iː sil|600
+no thank you|n əʊ sil θ a ŋ k sil j ə sil|600
+my name is|m ɪ sil n eɪ m sil ɪ z sil|600
+good morning|g ʊ d sil m ɔ n ɪ ŋ sil|600
+food|f uː d|600
+socks|s ɒ k s|600
+coat|kʰ əʊ t|600
+shop|ʃ ɒ p|600
+fit|f ɪ t|600
+swim|s w ɪ m|600
+love|l ʌ v|600
+classmate|k l ɑː s m eɪ t|600
+man|m a n|600
+children|tʃ ɪ ɫ d ɹ ə n|600
+meat|m iː t|600
+pepper|pʰ ɛ p ə|600
+lips|l ɪ p s|600
+eye|aɪ|600
+taste|tʰ eɪ s t|600
+listen|l ɪ s n̩|600
+home|h əʊ m|600
+look|l ʊ k|600
+cheek|tʃ iː k|600
+face|f eɪ s|600
+tongue|t ʌ ŋ|600
+smell|s m ɛ ɫ|600
+flower|f l aʊ ə|600
+run|ɹ ʌ n|600
+hand|h a n d|600
+legs|l ɛ g z|600
+back|b a k|600
+cool|kʰ uː ɫ|600
+horse|h ɔ s|600
+pig|pʰ ɪ g|600
+hen|h ɛ n|600
+bread|b ɹ ɛ d|600
+breakfast|b ɹ ɛ k f ə s t|600
+wash|w ɒ ʃ|600
+hat|h a t|600
+buy|b aɪ|600
+ball|b ɔ ɫ|600
+music|m j uː z ɪ k|600
+young|j ʌ ŋ|600
+child|tʃ aɪ ɫ d|600
+plate|p l eɪ t|600
+knife|n aɪ f|600
+cup|k ʌ p|600
+water|w ɔ t ə|600
+feel|f iː ɫ|600
+hear|h ɪə|600
+nose|n əʊ z|600
+ear|ɪə|600
+meatball|m iː t b ɔ ɫ|600
+soup|s uː p|600
+you were|j ə sil w ɜ sil sil|600
+dolphin|d ɒ ɫ f ɪ n|600
+come|k ʌ m|600
+lion|l aɪ ə n|600
+jaw|dʒ ɔ|600
+orange|ɒ ɹ ɪ n dʒ|600
+use|j uː z|600
+kitchen|kʰ ɪ tʃ ɪ n|600
+window|w ɪ n d əʊ|600
+table|tʰ eɪ b ə ɫ|600
+bed|b ɛ d|600
+garage|g a ɹ ɪ dʒ|600
+juice|dʒ uː s|600
+age|eɪ dʒ|600
+now|n aʊ|600
+where|w ɛə|600
+who|h uː|600
+today|tʰ ə d eɪ|600
+english|ɪ ŋ g l ɪ ʃ|600
+jump|dʒ ʌ m p|600
+your|j ʊə|600
+forest|f ɒ ɹ ɪ s t|600
+you're welcome|j ʊə sil sil w ɛ ɫ k ə m sil|600
+dry|d ɹ aɪ|600
+loud|l aʊ d|600
+sound|s aʊ n d|600
+farmer|f ɑː m ə|600
+drink|d ɹ ɪ ŋ k|600
+chin|tʃ ɪ n|600
+good|g ʊ d|600
+dog|d ɒ g|600
+cook|k ʊ k|600
+berry|b ɛ ɹ iː|600
+old|əʊ ɫ d|600
+butter|b ʌ t ə|600
+eat|iː t|600
+dark|d ɑː k|600
+cut|k ʌ t|600
+cucumber|k j uː k ʌ m b ə|600
+cheese|tʃ iː z|600
+it|ɪ t|600
+bear|b ɛə|600
+owl|aʊ ɫ|600
+potato|pʰ ə tʰ eɪ t əʊ|600
+yet|j ɛ t|600
+grass|g ɹ ɑː s|600
+baby|b eɪ b iː|600
+pear|pʰ ɛə|600
+carpet|kʰ ɑː p ɪ t|600
+why|w aɪ|600
+lemon|l ɛ m ə n|600
+cherry|tʃ ɛ ɹ iː|600
+lamp|l a m p|600
+good evening|g ʊ d sil iː v n̩ ɪ ŋ sil|600
+woman|w ʊ m ə n|600
+come here|k ʌ m sil h ɪə sil sil|600
+you are|j ə sil ə sil sil|600

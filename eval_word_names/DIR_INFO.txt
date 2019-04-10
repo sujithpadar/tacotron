@@ -1,0 +1,5 @@
+------------------------game_words_finnish_phone_rep_600.txt
+SIAK Game words representation in finnish phone representation form, to be used to generate wave files.
+girl|g ɜ ɫ|600
+hello|h ɛ l əʊ|600
+book|b ʊ k|600

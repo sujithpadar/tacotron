@@ -1,7 +1,7 @@
 import tensorflow as tf
 from tensorflow.contrib.rnn import GRUCell, MultiRNNCell, OutputProjectionWrapper, ResidualWrapper
 from tensorflow.contrib.seq2seq import BasicDecoder, BahdanauAttention, AttentionWrapper
-from text.symbols import glob_ph_attribute_vector
+from text.symbols import symbols
 from speakers.embeddings import get_spk_emb_table
 from util.infolog import log
 from .helpers import TacoTestHelper, TacoTrainingHelper
@@ -15,7 +15,7 @@ class Tacotron():
     self._hparams = hparams
 
 
-  def initialize(self, inputs, input_lengths, speaker_ids, num_speakers, mel_targets=None, linear_targets=None):
+  def initialize(self, inputs, input_lengths, speaker_ids, mel_targets=None, linear_targets=None):
     '''Initializes the model for inference.
 
     Sets "mel_outputs", "linear_outputs", and "alignments" fields.
@@ -64,7 +64,7 @@ class Tacotron():
                             name='speaker_embedding',
                             dtype=tf.float32)
 
-      tiled_speaker_id = tf.tile(tf.expand_dims(int(speaker_ids-1), axis=1), [1, tf.shape(inputs)[1]])
+      tiled_speaker_id = tf.tile(tf.expand_dims(speaker_ids, axis=1), [1, tf.shape(inputs)[1]])
       embedded_speakers = tf.nn.embedding_lookup(
         speaker_embedding_table, tiled_speaker_id)                                # [N, T_in, 256]
       embedded = tf.concat([embedded_inputs, embedded_speakers], axis=-1)         # [N, T_in, 512]

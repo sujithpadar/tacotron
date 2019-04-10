@@ -2,7 +2,7 @@ import numpy as np
 import os
 import pickle
 from speakers.preprocess_speaker_embedding_speecon import feature_extraction, extract_embeddings,load_model
-from speakers.preprocess_speaker_embedding_speecon import SphericalKMeans,
+from speakers.preprocess_speaker_embedding_speecon import SphericalKMeans
 
 '''
 This script Generates the Speaker Embedding table for models/tacotron.py
