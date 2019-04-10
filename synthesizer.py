@@ -18,7 +18,7 @@ class Synthesizer:
     num_speakers = int(num_speakers)
     with tf.variable_scope('model') as scope:
       self.model = create_model(model_name, hparams)
-      self.model.initialize(inputs, input_lengths, speaker_ids,num_speakers)
+      self.model.initialize(inputs, input_lengths, speaker_ids, num_speakers)
       self.wav_output = audio.inv_spectrogram_tensorflow(self.model.linear_outputs[0])
 
     print('Loading checkpoint: %s' % checkpoint_path)

@@ -2,6 +2,7 @@ import tensorflow as tf
 from tensorflow.contrib.rnn import GRUCell, MultiRNNCell, OutputProjectionWrapper, ResidualWrapper
 from tensorflow.contrib.seq2seq import BasicDecoder, BahdanauAttention, AttentionWrapper
 from text.symbols import glob_ph_attribute_vector
+from speakers.embeddings import get_spk_emb_table
 from util.infolog import log
 from .helpers import TacoTestHelper, TacoTrainingHelper
 from .modules import encoder_cbhg, post_cbhg, prenet
@@ -43,16 +44,25 @@ class Tacotron():
         'embedding', [len(symbols), hp.embed_depth], dtype=tf.float32,
         initializer=tf.truncated_normal_initializer(stddev=0.5))
       '''
+
       embedding_table = tf.constant(
                               glob_ph_attribute_vector,
                               name='embedding',
                               dtype=tf.float32)
       embedded_inputs = tf.nn.embedding_lookup(embedding_table, inputs)          # [N, T_in, embed_depth=256]
       # Speaker Embeddings
+      '''
       speaker_embedding_table = tf.get_variable(
         'speaker_embedding', [num_speakers, hp.embed_depth], dtype=tf.float32,
         initializer=tf.truncated_normal_initializer(stddev=0.5))
-      tiled_speaker_id = tf.tile(tf.expand_dims(speaker_ids, axis=1), [1, tf.shape(inputs)[1]])
+      '''
+      spk_emb_table = get_spk_emb_table(is_training)
+      speaker_embedding_table = tf.constant(
+                            spk_emb_table,
+                            name='speaker_embedding',
+                            dtype=tf.float32)
+
+      tiled_speaker_id = tf.tile(tf.expand_dims(int(speaker_ids-1), axis=1), [1, tf.shape(inputs)[1]])
       embedded_speakers = tf.nn.embedding_lookup(
         speaker_embedding_table, tiled_speaker_id)                                # [N, T_in, 256]
       embedded = tf.concat([embedded_inputs, embedded_speakers], axis=-1)         # [N, T_in, 512]
