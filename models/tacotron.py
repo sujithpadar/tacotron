@@ -52,6 +52,13 @@ class Tacotron():
       '''
       embedded_inputs = tf.nn.embedding_lookup(embedding_table, inputs)          # [N, T_in, embed_depth=256]
       
+
+      # Encoder
+      prenet_outputs = prenet(embedded_inputs, is_training, hp.prenet_depths)    # [N, T_in, prenet_depths[-1]=128]
+      encoder_outputs = encoder_cbhg(prenet_outputs, input_lengths, is_training, # [N, T_in, encoder_depth=256]
+                                     hp.encoder_depth)
+      
+      
       # Speaker Embeddings
       '''
       speaker_embedding_table = tf.get_variable(
@@ -67,17 +74,11 @@ class Tacotron():
       tiled_speaker_id = tf.tile(tf.expand_dims(speaker_ids, axis=1), [1, tf.shape(inputs)[1]])
       embedded_speakers = tf.nn.embedding_lookup(
         speaker_embedding_table, tiled_speaker_id)                                # [N, T_in, 256]
-      embedded = tf.concat([embedded_inputs, embedded_speakers], axis=-1)         # [N, T_in, 512]
-
-      # Encoder
-      prenet_outputs = prenet(embedded, is_training, hp.prenet_depths)    # [N, T_in, prenet_depths[-1]=128]
-      encoder_outputs = encoder_cbhg(prenet_outputs, input_lengths, is_training, # [N, T_in, encoder_depth=256]
-                                     hp.encoder_depth)
-
+      spk_concat_encoder_outputs = tf.concat([encoder_outputs, embedded_speakers], axis=-1)         # [N, T_in, 512]
       # Attention
       attention_cell = AttentionWrapper(
         GRUCell(hp.attention_depth),
-        BahdanauAttention(hp.attention_depth, encoder_outputs),
+        BahdanauAttention(hp.attention_depth, spk_concat_encoder_outputs),
         alignment_history=True,
         output_attention=False)                                                  # [N, T_in, attention_depth=256]
       
