@@ -96,8 +96,6 @@ class DataFeeder(threading.Thread):
     batches = [examples[i:i+n] for i in range(0, len(examples), n)]
     random.shuffle(batches)
 
-    log('files which are being trained on:')
-    log(file_names)
     log('Generated %d batches of size %d in %.03f sec' % (len(batches), n, time.time() - start))
     for batch in batches:
       feed_dict = dict(zip(self._placeholders, _prepare_batch(batch, r)))
@@ -120,8 +118,8 @@ class DataFeeder(threading.Thread):
     input_data = np.asarray(text_to_sequence(text, self._cleaner_names), dtype=np.int32)
     linear_target = np.load(os.path.join(self._datadir, meta[0]))
     mel_target = np.load(os.path.join(self._datadir, meta[1]))
-    speaker_id = int(meta[4])
-    return (file_name,input_data, mel_target, linear_target, len(linear_target), speaker_id)
+    speaker_id = int(meta[4])-1
+    return (file_name, input_data, mel_target, linear_target, len(linear_target), speaker_id)
 
 
   def _maybe_get_arpabet(self, word):

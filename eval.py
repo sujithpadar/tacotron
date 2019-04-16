@@ -3,7 +3,7 @@ import os
 import re
 from hparams import hparams, hparams_debug_string
 from synthesizer import Synthesizer
-
+from speakers.embeddings import gen_new_embedding_table
 
 sentences = [
   # From July 8, 2017 New York Times:
@@ -31,17 +31,18 @@ def get_output_base_path(checkpoint_path,text_file_name):
 
 def run_eval(args):
   print(hparams_debug_string())
+  if args.speaker_dir is not 'None':
+      gen_new_embedding_table(args.speaker_dir)
   synth = Synthesizer()
-  synth.load(args.checkpoint,args.num_speakers)
+  synth.load(args.checkpoint)
   base_path = get_output_base_path(args.checkpoint,args.text_file)
   with open(args.text_file) as file:
       for line in file:
           parts = line.split('|')
           i = parts[0]
           text = parts[1]
-          text_filename = text.split(' ')[0]
-          speaker = int(parts[2])
-          path = '%s-%s-%s-%d.wav' % (base_path, i, text, speaker)
+          speaker = int(parts[2]) - 1
+          path = '%s-%s-%s-%d.wav' % (base_path, i, text, speaker+1)
           print('Synthesizing: %s' % path)
           with open(path, 'wb') as f:
               f.write(synth.synthesize(text, speaker))
@@ -51,7 +52,7 @@ def main():
   parser = argparse.ArgumentParser()
   parser.add_argument('--checkpoint', required=True, help='Path to model checkpoint')
   parser.add_argument('--text_file', required=True, help='Path to text file to generate <id>|<sentence>|<speaker id>')
-  parser.add_argument('--num_speakers', required=True, help='number of spekaers during the training')
+  parser.add_argument('--speaker_dir', default='None', help='Path to the folder with wav files of the new speaker')
   # parser.add_argument('--speaker', type=int, default=374, help='Speaker ID')
   parser.add_argument('--hparams', default='',
     help='Hyperparameter overrides as a comma-separated list of name=value pairs')

@@ -2,6 +2,7 @@ import tensorflow as tf
 from tensorflow.contrib.rnn import GRUCell, MultiRNNCell, OutputProjectionWrapper, ResidualWrapper
 from tensorflow.contrib.seq2seq import BasicDecoder, BahdanauAttention, AttentionWrapper
 from text.symbols import symbols
+from speakers.embeddings import get_spk_emb_table
 from util.infolog import log
 from .helpers import TacoTestHelper, TacoTrainingHelper
 from .modules import encoder_cbhg, post_cbhg, prenet
@@ -14,7 +15,7 @@ class Tacotron():
     self._hparams = hparams
 
 
-  def initialize(self, inputs, input_lengths, speaker_ids, num_speakers, mel_targets=None, linear_targets=None):
+  def initialize(self, inputs, input_lengths, speaker_ids, mel_targets=None, linear_targets=None):
     '''Initializes the model for inference.
 
     Sets "mel_outputs", "linear_outputs", and "alignments" fields.
@@ -41,24 +42,34 @@ class Tacotron():
         'embedding', [len(symbols), hp.embed_depth], dtype=tf.float32,
         initializer=tf.truncated_normal_initializer(stddev=0.5))
       embedded_inputs = tf.nn.embedding_lookup(embedding_table, inputs)          # [N, T_in, embed_depth=256]
+      
+
+      # Encoder
+      prenet_outputs = prenet(embedded_inputs, is_training, hp.prenet_depths)    # [N, T_in, prenet_depths[-1]=128]
+      encoder_outputs = encoder_cbhg(prenet_outputs, input_lengths, is_training, # [N, T_in, encoder_depth=256]
+                                     hp.encoder_depth)
+      
+      
       # Speaker Embeddings
+      '''
       speaker_embedding_table = tf.get_variable(
         'speaker_embedding', [num_speakers, hp.embed_depth], dtype=tf.float32,
         initializer=tf.truncated_normal_initializer(stddev=0.5))
+      '''
+      spk_emb_table = get_spk_emb_table(is_training)
+      speaker_embedding_table = tf.constant(
+                            spk_emb_table,
+                            name='speaker_embedding',
+                            dtype=tf.float32)
+
       tiled_speaker_id = tf.tile(tf.expand_dims(speaker_ids, axis=1), [1, tf.shape(inputs)[1]])
       embedded_speakers = tf.nn.embedding_lookup(
         speaker_embedding_table, tiled_speaker_id)                                # [N, T_in, 256]
-      embedded = tf.concat([embedded_inputs, embedded_speakers], axis=-1)         # [N, T_in, 512]
-
-      # Encoder
-      prenet_outputs = prenet(embedded, is_training, hp.prenet_depths)    # [N, T_in, prenet_depths[-1]=128]
-      encoder_outputs = encoder_cbhg(prenet_outputs, input_lengths, is_training, # [N, T_in, encoder_depth=256]
-                                     hp.encoder_depth)
-
+      spk_concat_encoder_outputs = tf.concat([encoder_outputs, embedded_speakers], axis=-1)         # [N, T_in, 512]
       # Attention
       attention_cell = AttentionWrapper(
         GRUCell(hp.attention_depth),
-        BahdanauAttention(hp.attention_depth, encoder_outputs),
+        BahdanauAttention(hp.attention_depth, spk_concat_encoder_outputs),
         alignment_history=True,
         output_attention=False)                                                  # [N, T_in, attention_depth=256]
       
