@@ -1,7 +1,7 @@
 import tensorflow as tf
 from tensorflow.contrib.rnn import GRUCell, MultiRNNCell, OutputProjectionWrapper, ResidualWrapper
 from tensorflow.contrib.seq2seq import BasicDecoder, BahdanauAttention, AttentionWrapper
-from text.symbols import glob_ph_attribute_vector
+from text.symbols import glob_ph_attribute_vector, symbols
 from util.infolog import log
 from .helpers import TacoTestHelper, TacoTrainingHelper
 from .modules import encoder_cbhg, post_cbhg, prenet
@@ -47,7 +47,7 @@ class Tacotron():
                               name='embedding',
                               dtype=tf.float32)
       '''
-      embedded_inputs = tf.nn.embedding_lookup(embedding_table, inputs)          # [N, T_in, embed_depth=256]
+      embedded_inputs = tf.nn.embedding_lookup(embedding_table, inputs, max_norm=1)          # [N, T_in, embed_depth=256]
       # Speaker Embeddings
       speaker_embedding_table = tf.get_variable(
         'speaker_embedding', [num_speakers, hp.embed_depth], dtype=tf.float32,
