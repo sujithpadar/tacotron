@@ -42,7 +42,7 @@ def run_eval(args):
           i = parts[0]
           text = parts[1]
           speaker = int(parts[2]) - 1
-          path = '%s-%s-%d.wav' % (base_path, i, speaker)
+          path = '%s-%s-%d.wav' % (base_path, i, speaker+1)
           print('Synthesizing: %s' % path)
           with open(path, 'wb') as f:
               f.write(synth.synthesize(text, speaker))
