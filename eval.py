@@ -41,7 +41,7 @@ def run_eval(args):
           text = parts[1]
           text_filename = text.split(' ')[0]
           speaker = int(parts[2])
-          path = '%s-%s-%d.wav' % (base_path, i, speaker)
+          path = '%s-%s-%s-%d.wav' % (base_path, i, text, speaker)
           print('Synthesizing: %s' % path)
           with open(path, 'wb') as f:
               f.write(synth.synthesize(text, speaker))
