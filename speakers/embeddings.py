@@ -47,7 +47,7 @@ def gen_new_embedding_table(dir_path):
     spk_emb = np.loadtxt('speakers/spk_emb_200_AkuNet.256.200.2.2000.1000._embedding_training')
     new_speaker_embedding = gen_emb(dir_path)
     spk_emb[230, :] = new_speaker_embedding[np.newaxis, :]
-    np.savetxt('speakers/spk_emb_200_AkuNet.256.200.2.2000.1000._embedding_evaluate')
+    np.savetxt('speakers/spk_emb_200_AkuNet.256.200.2.2000.1000._embedding_evaluate', spk_emb)
     return 0
 
 def gen_emb(dir_path):
@@ -56,12 +56,13 @@ def gen_emb(dir_path):
     :param dir_path: Path to the directory with the wav files
     :return: 1 embedding for all the wav files
     '''
-    model = load_model('speakers/AkuNet.256.200.2.2000.1000.')
-    files = os.listdir()
+    model = load_model('speaker_emb_models/AkuNet.256.200.2.2000.1000.')
+    files = os.listdir(dir_path)
     for file in files:
-        combined_emb = np.empty(0, 200)
+        print('Processing:', file)
+        combined_emb = np.empty([0, 200])
         if ".wav" in file:
-            features = feature_extraction(file)
+            features = feature_extraction(os.path.join(dir_path,file))
             print('features dim:', features.shape)
             embeddings = extract_embeddings(features, model)
             if len(embeddings) == int(200):
